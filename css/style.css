@@ -454,6 +454,44 @@ html[data-theme="light"] .scanlines { opacity: .3; }
 .step p { color: var(--muted); font-size: .78rem; line-height: 1.5; }
 .step-arrow { align-self: center; color: var(--neon); font-size: 1.4rem; }
 
+/* ============ SLIDE VISUALS (media split) ============ */
+.media-split {
+  display: grid; grid-template-columns: 1.5fr 1fr;
+  gap: clamp(12px, 2vw, 26px);
+  width: min(1150px, 100%);
+  align-items: center;
+}
+.media-main {
+  display: flex; flex-direction: column; align-items: center;
+  gap: clamp(12px, 2vh, 20px);
+  min-width: 0;
+}
+.media-main > * { width: 100%; }
+.slide-visual {
+  margin: 0; padding: 10px 10px 4px;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.slide-visual:hover { transform: scale(1.02); }
+.slide-visual img {
+  display: block; width: 100%;
+  max-height: 46vh; object-fit: contain;
+  border-radius: 10px;
+}
+.slide-visual figcaption {
+  font-size: .58rem; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--neon); padding: 8px 4px;
+  text-align: left;
+}
+/* content blocks adapt inside the split column */
+.media-split .card-grid.two { grid-template-columns: 1fr; }
+.media-split .steps-row .step { flex: 1 1 42%; }
+.media-split .step-arrow { display: none; }
+
+@media (max-width: 900px) {
+  .media-split { grid-template-columns: 1fr; }
+  .slide-visual img { max-height: 32vh; }
+}
+
 /* ============ MISC PANELS ============ */
 .definition { padding: 20px 30px; max-width: 950px; font-size: clamp(.95rem, 1.9vw, 1.2rem); line-height: 1.7; }
 .quote-box { padding: 18px 30px; max-width: 850px; font-size: clamp(.95rem, 1.9vw, 1.2rem); font-style: italic; }
