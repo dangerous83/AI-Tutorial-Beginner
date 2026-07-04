@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Starter Lab — PMCC 4th Watch</title>
+<meta name="description" content="AI Starter Lab: Create, Design & Present with Artificial Intelligence — an interactive workshop by PMCC 4th Watch.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ANIMATED AI BACKGROUND -->
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+<div class="scanlines" aria-hidden="true"></div>
+
+<!-- ============ TERMINAL BOOT OVERLAY ============ -->
+<div id="terminal-overlay">
+  <div class="terminal-window">
+    <div class="terminal-titlebar">
+      <span class="t-dot red"></span><span class="t-dot yellow"></span><span class="t-dot green"></span>
+      <span class="terminal-title">PMCC://4TH-WATCH ▸ ai_starter_lab.exe</span>
+    </div>
+    <div class="terminal-body" id="terminal-body"></div>
+    <div class="terminal-continue hidden" id="terminal-continue">▸ PRESS <kbd>ENTER</kbd> OR CLICK ANYWHERE TO CONTINUE_</div>
+  </div>
+  <button id="skip-boot" class="ghost-btn">SKIP INTRO ⏭</button>
+</div>
+
+<!-- ============ TOP HUD ============ -->
+<header id="hud-top" class="hidden">
+  <div class="hud-left">
+    <img class="hud-logo" src="https://cdn.prod.website-files.com/695ceaac65bfa3ddd85733fb/69e8b9f4231a90b0dd525199_PMCC%20Logo.png" alt="PMCC logo" onerror="this.outerHTML='<span class=hud-logo-fallback>PMCC</span>'">
+    <span class="hud-title">AI STARTER LAB <span class="hud-sub">// PMCC 4TH WATCH</span></span>
+  </div>
+  <div class="hud-right">
+    <span id="hud-clock" class="hud-chip mono">00:00</span>
+    <button id="btn-menu"  class="hud-btn" title="Slide menu (G)">☰</button>
+    <button id="btn-notes" class="hud-btn" title="Presenter notes (N)">📝</button>
+    <button id="btn-theme" class="hud-btn" title="Dark / Light mode (T)">◐</button>
+    <button id="btn-mute"  class="hud-btn" title="Mute / Unmute (M)">🔊</button>
+    <button id="btn-full"  class="hud-btn" title="Fullscreen (F)">⛶</button>
+  </div>
+</header>
+
+<!-- PROGRESS BAR -->
+<div id="progress-track" class="hidden"><div id="progress-bar"></div></div>
+
+<!-- ============ DECK ============ -->
+<main id="deck">
+
+  <!-- ============ SLIDE 0 : FRONT PAGE ============ -->
+  <section class="slide cover active" data-notes-id="cover">
+    <div class="hud-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="cover-inner">
+      <img class="cover-logo floaty" src="https://cdn.prod.website-files.com/695ceaac65bfa3ddd85733fb/69e8b9f4231a90b0dd525199_PMCC%20Logo.png" alt="PMCC 4th Watch logo" onerror="this.outerHTML='<div class=cover-logo-fallback>PMCC<br>4TH WATCH</div>'">
+      <div class="cover-chip mono">◉ SYSTEM ONLINE — PMCC 4TH WATCH WORKSHOP</div>
+      <h1 class="cover-title">AI STARTER <span class="gold">LAB</span></h1>
+      <p class="cover-subtitle">Create, Design &amp; Present with Artificial Intelligence</p>
+      <div class="cover-presenter glass">
+        <span class="presenter-avatar" aria-hidden="true">👨‍💻</span>
+        <span>
+          <strong>Bro. Alvin</strong><br>
+          <small>Professional Graphic Designer &amp; AI Specialist</small>
+        </span>
+      </div>
+      <button id="btn-start" class="start-btn">▶ START PRESENTATION</button>
+      <p class="cover-hint mono">audience: beginners 12–22 &nbsp;|&nbsp; duration: ≤ 2 hours &nbsp;|&nbsp; use ← → keys to navigate</p>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 1 : WELCOME ============ -->
+  <section class="slide" data-notes-id="s1">
+    <div class="hud-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="slide-head">
+      <span class="module-chip mono">MODULE 01</span>
+      <h2>Welcome to <span class="neon">AI Starter Lab</span> 🚀</h2>
+      <p class="lead">Today you become an <strong>AI creator</strong> — not just an AI user. Click each card to unlock your mission!</p>
+    </div>
+    <div class="card-grid four">
+      <button class="click-card" data-reveal><span class="cc-icon">🎨</span><h3>Create Images</h3><p class="cc-hidden">Turn words into art with AI image generators.</p></button>
+      <button class="click-card" data-reveal><span class="cc-icon">🎬</span><h3>Make Videos</h3><p class="cc-hidden">Describe a scene — AI films it for you.</p></button>
+      <button class="click-card" data-reveal><span class="cc-icon">📣</span><h3>Design Ads</h3><p class="cc-hidden">Build scroll-stopping social media ads.</p></button>
+      <button class="click-card" data-reveal><span class="cc-icon">📊</span><h3>Build Slides</h3><p class="cc-hidden">Let GPT draft a full presentation in minutes.</p></button>
+    </div>
+    <div class="info-strip glass mono">⏱ ~2 hours &nbsp;•&nbsp; 🧠 zero experience needed &nbsp;•&nbsp; 🛠 hands-on activities &nbsp;•&nbsp; 🏆 certificate at the end</div>
+  </section>
+
+  <!-- ============ SLIDE 2 : WHAT IS AI? ============ -->
+  <section class="slide" data-notes-id="s2">
+    <div class="hud-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="slide-head">
+      <span class="module-chip mono">MODULE 02</span>
+      <h2>What is <span class="neon">AI</span>? 🤖</h2>
+    </div>
+    <div class="definition glass glow-border">
+      <p><strong class="gold">Artificial Intelligence</strong> = computer systems that <strong>learn patterns from data</strong> so they can do things that normally need human intelligence — like writing, drawing, talking, and deciding.</p>
+    </div>
+    <p class="lead center">Surprise: you already use AI every day. Click to reveal 👇</p>
+    <div class="card-grid five">
+      <button class="click-card sm" data-reveal><span class="cc-icon">📱</span><h3>TikTok / YouTube</h3><p class="cc-hidden">AI picks your "For You" feed.</p></button>
+      <button class="click-card sm" data-reveal><span class="cc-icon">🤳</span><h3>Face Filters</h3><p class="cc-hidden">AI finds your face and maps effects onto it.</p></button>
+      <button class="click-card sm" data-reveal><span class="cc-icon">⌨️</span><h3>Autocorrect</h3><p class="cc-hidden">AI predicts the word you meant to type.</p></button>
+      <button class="click-card sm" data-reveal><span class="cc-icon">🗺️</span><h3>Google Maps</h3><p class="cc-hidden">AI predicts traffic and the fastest route.</p></button>
+      <button class="click-card sm" data-reveal><span class="cc-icon">🎙️</span><h3>Siri / Alexa</h3><p class="cc-hidden">AI understands your voice and answers.</p></button>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 3 : WHY AI MATTERS ============ -->
+  <section class="slide" data-notes-id="s3">
+    <div class="hud-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="slide-head">
+      <span class="module-chip mono">MODULE 03</span>
+      <h2>Why AI Matters for <span class="neon">Students &amp; Creators</span> ⚡</h2>
+    </div>
+    <div class="card-grid four">
+      <div class="hover-card glass"><span class="cc-icon">📚</span><h3>Study Buddy</h3><p>Explain hard topics simply, quiz you, summarize notes — 24/7.</p></div>
+      <div class="hover-card glass"><span class="cc-icon">🎨</span><h3>Creative Superpower</h3><p>Design, art, music, and video — even if you "can't draw".</p></div>
+      <div class="hover-card glass"><span class="cc-icon">💼</span><h3>Future-Proof Skill</h3><p>Companies now look for people who can work <em>with</em> AI.</p></div>
+      <div class="hover-card glass"><span class="cc-icon">🚀</span><h3>Speed</h3><p>Ideas that took days now take minutes. More time to be creative.</p></div>
+    </div>
+    <div class="quote-box glass glow-border-gold">
+      <p>“AI won’t replace people — but people who <span class="gold">use AI</span> will move faster than people who don’t.”</p>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 4 : POWERFUL PROMPTS ============ -->
+  <section class="slide" data-notes-id="s4">
+    <div class="hud-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="slide-head">
+      <span class="module-chip mono">MODULE 04</span>
+      <h2>How to Write a <span class="neon">Powerful Prompt</span> ✍️</h2>
+      <p class="lead">A prompt is the instruction you give AI. Better instruction = better result. Use the <strong class="gold">R‑T‑C‑F</strong> formula:</p>
+    </div>
+    <div class="formula-row">
+      <div class="formula-part glass"><span class="f-letter neon">R</span><h3>Role</h3><p>“Act as a graphic designer…”</p></div>
+      <span class="f-plus">+</span>
+      <div class="formula-part glass"><span class="f-letter neon">T</span><h3>Task</h3><p>“…create 3 poster ideas…”</p></div>
+      <span class="f-plus">+</span>
+      <div class="formula-part glass"><span class="f-letter neon">C</span><h3>Context</h3><p>“…for a youth church event…”</p></div>
+      <span class="f-plus">+</span>
+      <div class="formula-part glass"><span class="f-letter neon">F</span><h3>Format</h3><p>“…as a bullet list.”</p></div>
+    </div>
+    <div class="compare-grid">
+      <div class="compare glass bad"><h4>😐 Weak prompt</h4><p class="mono">"make a poster"</p></div>
+      <div class="compare glass good"><h4>🤩 Powerful prompt</h4><p class="mono">"Act as a graphic designer. Create 3 poster concepts for a youth event called AI Starter Lab. Audience is ages 12–22. Give each concept a title, color palette, and slogan, as a bullet list."</p></div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 5 : AI IMAGE GENERATION ============ -->
+  <section class="slide" data-notes-id="s5">
+    <div class="hud-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="slide-head">
+      <span class="module-chip mono">MODULE 05</span>
+      <h2><span class="neon">AI Image</span> Generation 🖼️</h2>
+      <p class="lead">Type a description → AI paints it in seconds. This is called <strong>text‑to‑image</strong>.</p>
+    </div>
+    <div class="card-grid five">
+      <div class="hover-card glass tool"><h3>Copilot / Bing</h3><p>Free &amp; easy — perfect first tool.</p><span class="tag gold-tag">FREE</span></div>
+      <div class="hover-card glass tool"><h3>Canva AI</h3><p>Generate images right inside your designs.</p><span class="tag gold-tag">FREE TIER</span></div>
+      <div class="hover-card glass tool"><h3>Adobe Firefly</h3><p>Pro-quality, safe for commercial use.</p><span class="tag">PRO</span></div>
+      <div class="hover-card glass tool"><h3>Leonardo.Ai</h3><p>Great styles + daily free credits.</p><span class="tag gold-tag">FREE TIER</span></div>
+      <div class="hover-card glass tool"><h3>Midjourney</h3><p>Famous for stunning artistic results.</p><span class="tag">PAID</span></div>
+    </div>
+    <div class="demo-box glass glow-border mono">
+      <span class="demo-label">LIVE DEMO PROMPT ▸</span>
+      "a futuristic youth tech lab, students with glowing holograms, neon blue and gold lighting, cinematic, ultra detailed"
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 6 : IMAGE PROMPT FORMULA ============ -->
+  <section class="slide" data-notes-id="s6">
+    <div class="hud-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="slide-head">
+      <span class="module-chip mono">MODULE 06</span>
+      <h2>Image <span class="neon">Prompt Formula</span> 🧪</h2>
+      <p class="lead">Tap each card to flip it. Stack these 6 ingredients for pro-level images:</p>
+    </div>
+    <div class="card-grid six">
+      <button class="flip-card" data-flip><span class="flip-inner"><span class="flip-front"><i>1</i>Subject</span><span class="flip-back">WHO or WHAT<br><em>"a young astronaut"</em></span></span></button>
+      <button class="flip-card" data-flip><span class="flip-inner"><span class="flip-front"><i>2</i>Setting</span><span class="flip-back">WHERE<br><em>"on a neon city rooftop"</em></span></span></button>
+      <button class="flip-card" data-flip><span class="flip-inner"><span class="flip-front"><i>3</i>Style</span><span class="flip-back">LOOK<br><em>"digital art, cinematic"</em></span></span></button>
+      <button class="flip-card" data-flip><span class="flip-inner"><span class="flip-front"><i>4</i>Lighting</span><span class="flip-back">LIGHT<br><em>"golden hour glow"</em></span></span></button>
+      <button class="flip-card" data-flip><span class="flip-inner"><span class="flip-front"><i>5</i>Mood</span><span class="flip-back">FEELING<br><em>"hopeful, epic"</em></span></span></button>
+      <button class="flip-card" data-flip><span class="flip-inner"><span class="flip-front"><i>6</i>Quality</span><span class="flip-back">DETAIL<br><em>"ultra detailed, 4K"</em></span></span></button>
+    </div>
+    <div class="demo-box glass glow-border-gold mono">
+      <span class="demo-label gold">FULL PROMPT ▸</span>
+      "a young astronaut, on a neon city rooftop, digital art, cinematic, golden hour glow, hopeful and epic mood, ultra detailed, 4K"
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 7 : AI VIDEO GENERATION ============ -->
+  <section class="slide" data-notes-id="s7">
+    <div class="hud-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="slide-head">
+      <span class="module-chip mono">MODULE 07</span>
+      <h2><span class="neon">AI Video</span> Generation 🎬</h2>
+      <p class="lead">Describe a scene → AI generates a moving clip. Two magic modes:</p>
+    </div>
+    <div class="card-grid two">
+      <div class="hover-card glass big"><span class="cc-icon">⌨️→🎬</span><h3>Text‑to‑Video</h3><p>Write a scene description and AI films it from scratch.</p></div>
+      <div class="hover-card glass big"><span class="cc-icon">🖼️→🎬</span><h3>Image‑to‑Video</h3><p>Upload a picture and AI makes it move — clouds drift, hair blows, cameras pan.</p></div>
+    </div>
+    <div class="card-grid five">
+      <div class="hover-card glass tool"><h3>Sora</h3><p>OpenAI's cinematic video model.</p></div>
+      <div class="hover-card glass tool"><h3>Runway</h3><p>The creator-favorite video suite.</p></div>
+      <div class="hover-card glass tool"><h3>Pika</h3><p>Fun, fast, beginner friendly.</p></div>
+      <div class="hover-card glass tool"><h3>Kling</h3><p>Impressive realistic motion.</p></div>
+      <div class="hover-card glass tool"><h3>CapCut</h3><p>AI editing + effects on your phone.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 8 : VIDEO PROMPT FORMULA ============ -->
+  <section class="slide" data-notes-id="s8">
+    <div class="hud-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="slide-head">
+      <span class="module-chip mono">MODULE 08</span>
+      <h2>Video <span class="neon">Prompt Formula</span> 🎥</h2>
+      <p class="lead">Video adds two new ingredients: <strong class="gold">Action</strong> and <strong class="gold">Camera</strong>. Flip the cards:</p>
+    </div>
+    <div class="card-grid six">
+      <button class="flip-card" data-flip><span class="flip-inner"><span class="flip-front"><i>1</i>Scene</span><span class="flip-back">WHERE<br><em>"a rainy neon street"</em></span></span></button>
+      <button class="flip-card" data-flip><span class="flip-inner"><span class="flip-front"><i>2</i>Subject</span><span class="flip-back">WHO<br><em>"a robot holding an umbrella"</em></span></span></button>
+      <button class="flip-card" data-flip><span class="flip-inner"><span class="flip-front"><i>3</i>Action</span><span class="flip-back">MOVEMENT<br><em>"walks toward the camera"</em></span></span></button>
+      <button class="flip-card" data-flip><span class="flip-inner"><span class="flip-front"><i>4</i>Camera</span><span class="flip-back">SHOT<br><em>"slow dolly zoom, low angle"</em></span></span></button>
+      <button class="flip-card" data-flip><span class="flip-inner"><span class="flip-front"><i>5</i>Lighting</span><span class="flip-back">LIGHT<br><em>"blue neon reflections"</em></span></span></button>
+      <button class="flip-card" data-flip><span class="flip-inner"><span class="flip-front"><i>6</i>Style</span><span class="flip-back">LOOK<br><em>"cinematic, 24fps, film grain"</em></span></span></button>
+    </div>
+    <div class="demo-box glass glow-border-gold mono">
+      <span class="demo-label gold">FULL PROMPT ▸</span>
+      "a rainy neon street at night, a robot holding an umbrella walks toward the camera, slow dolly zoom, low angle, blue neon reflections, cinematic, film grain"
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 9 : SOCIAL MEDIA ADS ============ -->
+  <section class="slide" data-notes-id="s9">
+    <div class="hud-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="slide-head">
+      <span class="module-chip mono">MODULE 09</span>
+      <h2>Creating <span class="neon">Social Media Ads</span> with AI 📣</h2>
+      <p class="lead">One person + AI = a full creative team. The 4-step workflow:</p>
+    </div>
+    <div class="steps-row">
+      <div class="step glass"><span class="step-num">1</span><h3>💡 Idea</h3><p>Ask GPT: "Give me 5 ad ideas for a school bake sale."</p></div>
+      <div class="step-arrow">▸</div>
+      <div class="step glass"><span class="step-num">2</span><h3>✍️ Copy</h3><p>GPT writes the caption, headline, and hashtags.</p></div>
+      <div class="step-arrow">▸</div>
+      <div class="step glass"><span class="step-num">3</span><h3>🖼️ Visual</h3><p>Generate the image or video with your prompt formula.</p></div>
+      <div class="step-arrow">▸</div>
+      <div class="step glass"><span class="step-num">4</span><h3>🧩 Assemble</h3><p>Combine everything in Canva or CapCut. Post it!</p></div>
+    </div>
+    <div class="info-strip glass mono">⚡ Pro tip: make 2–3 versions and let your friends vote — that's real A/B testing!</div>
+  </section>
+
+  <!-- ============ SLIDE 10 : HOOK + VISUAL + CTA ============ -->
+  <section class="slide" data-notes-id="s10">
+    <div class="hud-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="slide-head">
+      <span class="module-chip mono">MODULE 10</span>
+      <h2>The Ad Formula: <span class="gold">Hook + Visual + CTA</span> 🎯</h2>
+      <p class="lead">Every great ad has exactly 3 parts. Flip each one:</p>
+    </div>
+    <div class="card-grid three">
+      <button class="flip-card tall" data-flip><span class="flip-inner"><span class="flip-front"><i>🪝</i>HOOK</span><span class="flip-back">First 2 seconds — grab attention!<br><em>"STOP scrolling — this changes everything…"</em></span></span></button>
+      <button class="flip-card tall" data-flip><span class="flip-inner"><span class="flip-front"><i>👁️</i>VISUAL</span><span class="flip-back">An image or clip that makes people FEEL something.<br><em>Bold colors, faces, motion.</em></span></span></button>
+      <button class="flip-card tall" data-flip><span class="flip-inner"><span class="flip-front"><i>📢</i>CTA</span><span class="flip-back">Call To Action — tell them what to do next.<br><em>"Join us Saturday • Link in bio!"</em></span></span></button>
+    </div>
+    <div class="demo-box glass glow-border mono">
+      <span class="demo-label">EXAMPLE ▸</span>
+      🪝 "Can't draw? Neither could I…" &nbsp;+&nbsp; 👁️ AI art timelapse &nbsp;+&nbsp; 📢 "Come to AI Starter Lab — this Saturday!"
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 11 : PRESENTATIONS WITH GPT ============ -->
+  <section class="slide" data-notes-id="s11">
+    <div class="hud-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="slide-head">
+      <span class="module-chip mono">MODULE 11</span>
+      <h2>Creating <span class="neon">Presentations</span> using GPT 📊</h2>
+      <p class="lead">Never start from a blank slide again:</p>
+    </div>
+    <div class="steps-row">
+      <div class="step glass"><span class="step-num">1</span><h3>🧠 Outline</h3><p>"Create a 10-slide outline about ocean pollution for teens."</p></div>
+      <div class="step-arrow">▸</div>
+      <div class="step glass"><span class="step-num">2</span><h3>📝 Slide text</h3><p>"Write a title + 3 short bullets for each slide."</p></div>
+      <div class="step-arrow">▸</div>
+      <div class="step glass"><span class="step-num">3</span><h3>🎨 Design</h3><p>Paste into PowerPoint, Canva, or Gamma — themes apply instantly.</p></div>
+      <div class="step-arrow">▸</div>
+      <div class="step glass"><span class="step-num">4</span><h3>✨ Polish</h3><p>Add AI images from Module 6. YOU stay the editor-in-chief.</p></div>
+    </div>
+    <div class="demo-box glass glow-border mono">
+      <span class="demo-label">MEGA PROMPT ▸</span>
+      "Act as a presentation designer. Create a 10-slide deck outline on [TOPIC] for [AUDIENCE]. For each slide give: a punchy title, 3 bullets (max 8 words each), and an image idea."
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 12 : TURN INTO PDF ============ -->
+  <section class="slide" data-notes-id="s12">
+    <div class="hud-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="slide-head">
+      <span class="module-chip mono">MODULE 12</span>
+      <h2>Turning Your Presentation into a <span class="neon">PDF</span> 📄</h2>
+      <p class="lead">PDF = the universal format. It opens everywhere and never breaks your fonts.</p>
+    </div>
+    <div class="card-grid three">
+      <div class="hover-card glass"><span class="cc-icon">🟦</span><h3>PowerPoint</h3><p>File → <strong>Export</strong> → Create PDF/XPS → Save.</p></div>
+      <div class="hover-card glass"><span class="cc-icon">🟪</span><h3>Canva / Gamma</h3><p><strong>Share → Download</strong> → choose <strong>PDF</strong> → Done.</p></div>
+      <div class="hover-card glass"><span class="cc-icon">🖨️</span><h3>Any App</h3><p>Print → destination: <strong>"Save as PDF"</strong>. Works everywhere!</p></div>
+    </div>
+    <div class="card-grid three">
+      <div class="hover-card glass sm2"><span class="cc-icon">📤</span><h3>Share</h3><p>Email, Messenger, group chat — one file, no broken layout.</p></div>
+      <div class="hover-card glass sm2"><span class="cc-icon">🖨️</span><h3>Print</h3><p>Perfect for handouts and posters.</p></div>
+      <div class="hover-card glass sm2"><span class="cc-icon">🔒</span><h3>Lock design</h3><p>Nobody can accidentally edit your slides.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 13 : RESPONSIBLE AI ============ -->
+  <section class="slide" data-notes-id="s13">
+    <div class="hud-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="slide-head">
+      <span class="module-chip mono">MODULE 13</span>
+      <h2><span class="gold">Responsible</span> AI Use 🛡️</h2>
+      <p class="lead">With great power comes great responsibility. The Creator's Code:</p>
+    </div>
+    <div class="compare-grid tall">
+      <div class="compare glass good">
+        <h4>✅ DO</h4>
+        <ul>
+          <li>Use AI to <strong>learn faster</strong> and brainstorm ideas</li>
+          <li><strong>Double‑check facts</strong> — AI can be confidently wrong</li>
+          <li>Be honest: say when AI helped you</li>
+          <li>Keep personal info <strong>private</strong></li>
+          <li>Add <strong>your own voice</strong> — AI is the tool, you are the artist</li>
+        </ul>
+      </div>
+      <div class="compare glass bad">
+        <h4>⛔ DON'T</h4>
+        <ul>
+          <li>Copy AI answers as homework and call it yours</li>
+          <li>Create fake images of <strong>real people</strong> (deepfakes)</li>
+          <li>Share passwords, addresses, or private photos with AI</li>
+          <li>Believe everything AI says without checking</li>
+          <li>Use AI to bully, trick, or harm anyone</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 14 : MINI QUIZ ============ -->
+  <section class="slide" data-notes-id="s14">
+    <div class="hud-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="slide-head">
+      <span class="module-chip mono">MODULE 14 — CHECKPOINT</span>
+      <h2>Mini <span class="neon">Quiz</span> 🧠</h2>
+      <p class="lead">Shout your answer, then hit <strong>REVEAL</strong>!</p>
+    </div>
+    <div class="quiz-list">
+      <div class="quiz-item glass">
+        <p><span class="q-num mono">Q1</span> What are the 4 parts of a powerful prompt?</p>
+        <button class="reveal-btn" data-quiz>REVEAL ▾</button>
+        <p class="quiz-answer hidden"><strong class="gold">Role + Task + Context + Format</strong> (R‑T‑C‑F)</p>
+      </div>
+      <div class="quiz-item glass">
+        <p><span class="q-num mono">Q2</span> "A dragon made of water, digital art, sunset lighting, epic mood, 4K" — which formula is this?</p>
+        <button class="reveal-btn" data-quiz>REVEAL ▾</button>
+        <p class="quiz-answer hidden"><strong class="gold">The Image Prompt Formula</strong> — subject, style, lighting, mood, quality.</p>
+      </div>
+      <div class="quiz-item glass">
+        <p><span class="q-num mono">Q3</span> What 3 parts does every great social media ad need?</p>
+        <button class="reveal-btn" data-quiz>REVEAL ▾</button>
+        <p class="quiz-answer hidden"><strong class="gold">Hook + Visual + CTA</strong></p>
+      </div>
+      <div class="quiz-item glass">
+        <p><span class="q-num mono">Q4</span> True or false: everything AI says is always correct.</p>
+        <button class="reveal-btn" data-quiz>REVEAL ▾</button>
+        <p class="quiz-answer hidden"><strong class="gold">FALSE!</strong> AI can "hallucinate" — always double‑check important facts.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 15 : PROMPT CHALLENGE ============ -->
+  <section class="slide" data-notes-id="s15">
+    <div class="hud-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="slide-head">
+      <span class="module-chip mono">MODULE 15 — ACTIVITY</span>
+      <h2>Prompt <span class="gold">Challenge</span> ⚔️</h2>
+      <p class="lead">Build an image prompt with the console below — or write your own on paper. Best prompt wins! 🏆</p>
+    </div>
+    <div class="builder glass glow-border">
+      <div class="builder-row">
+        <label>Subject<select id="pb-subject"><option>a young inventor</option><option>a cyber lion</option><option>a dancing robot</option><option>a flying skateboard</option><option>a friendly alien DJ</option></select></label>
+        <label>Setting<select id="pb-setting"><option>in a neon city</option><option>on the moon base</option><option>inside a giant computer</option><option>in a jungle of cables</option><option>at a futuristic youth camp</option></select></label>
+        <label>Style<select id="pb-style"><option>digital art</option><option>3D cartoon style</option><option>anime style</option><option>cinematic photo</option><option>pixel art</option></select></label>
+        <label>Lighting<select id="pb-light"><option>neon blue glow</option><option>golden hour light</option><option>dramatic spotlight</option><option>soft morning light</option></select></label>
+        <label>Mood<select id="pb-mood"><option>epic and hopeful</option><option>fun and playful</option><option>mysterious</option><option>peaceful</option></select></label>
+      </div>
+      <div class="builder-output mono" id="pb-output"></div>
+      <div class="builder-actions">
+        <button id="pb-random" class="mini-btn">🎲 RANDOMIZE</button>
+        <button id="pb-copy" class="mini-btn gold-btn">📋 COPY PROMPT</button>
+      </div>
+    </div>
+    <div class="timer-box glass" data-timer="180">
+      <span class="timer-label mono">CHALLENGE TIMER</span>
+      <span class="timer-display mono">03:00</span>
+      <span class="timer-controls">
+        <button class="mini-btn t-start">▶ START</button>
+        <button class="mini-btn t-pause">⏸ PAUSE</button>
+        <button class="mini-btn t-reset">↺ RESET</button>
+      </span>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 16 : FINAL ACTIVITY ============ -->
+  <section class="slide" data-notes-id="s16">
+    <div class="hud-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="slide-head">
+      <span class="module-chip mono">MODULE 16 — FINAL MISSION</span>
+      <h2>Final <span class="neon">Activity</span>: Choose Your Track 🎮</h2>
+      <p class="lead">Form teams of 2–4. Pick a track and create something real, right now:</p>
+    </div>
+    <div class="tabs">
+      <div class="tab-bar" role="tablist">
+        <button class="tab-btn active" data-tab="tab-image">🎨 IMAGE</button>
+        <button class="tab-btn" data-tab="tab-video">🎬 VIDEO</button>
+        <button class="tab-btn" data-tab="tab-ads">📣 ADS</button>
+        <button class="tab-btn" data-tab="tab-pres">📊 PRESENTATION</button>
+      </div>
+      <div class="tab-panel glass active" id="tab-image">
+        <h3>Mission: Event Poster Art</h3>
+        <p>Use the <strong>Image Prompt Formula</strong> to generate ONE amazing poster image for a youth event. Try 3 prompt versions and pick your best.</p>
+        <p class="mono demo-line">subject + setting + style + lighting + mood + quality</p>
+      </div>
+      <div class="tab-panel glass" id="tab-video">
+        <h3>Mission: 5‑Second Teaser</h3>
+        <p>Write a <strong>video prompt</strong> for a 5-second teaser clip announcing "AI Starter Lab". Include an action and a camera move.</p>
+        <p class="mono demo-line">scene + subject + action + camera + lighting + style</p>
+      </div>
+      <div class="tab-panel glass" id="tab-ads">
+        <h3>Mission: Scroll‑Stopper Ad</h3>
+        <p>Write a full mini-ad: one <strong>Hook</strong> line, one <strong>Visual</strong> idea (as an image prompt), and one <strong>CTA</strong>.</p>
+        <p class="mono demo-line">hook + visual + CTA</p>
+      </div>
+      <div class="tab-panel glass" id="tab-pres">
+        <h3>Mission: Instant Deck</h3>
+        <p>Use the <strong>Mega Prompt</strong> from Module 11 to outline a 5-slide presentation on a topic you love. Give every slide a title + 3 bullets.</p>
+        <p class="mono demo-line">outline → slide text → design → polish</p>
+      </div>
+    </div>
+    <div class="timer-box glass" data-timer="600">
+      <span class="timer-label mono">MISSION TIMER</span>
+      <span class="timer-display mono">10:00</span>
+      <span class="timer-controls">
+        <button class="mini-btn t-start">▶ START</button>
+        <button class="mini-btn t-pause">⏸ PAUSE</button>
+        <button class="mini-btn t-reset">↺ RESET</button>
+      </span>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 17 : CLOSING ============ -->
+  <section class="slide" data-notes-id="s17">
+    <div class="hud-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="certificate glass glow-border-gold">
+      <img class="cert-logo" src="https://cdn.prod.website-files.com/695ceaac65bfa3ddd85733fb/69e8b9f4231a90b0dd525199_PMCC%20Logo.png" alt="PMCC logo" onerror="this.outerHTML='<div class=cert-logo-fallback>PMCC</div>'">
+      <p class="cert-eyebrow mono">★ PMCC 4TH WATCH — OFFICIAL CERTIFICATION ★</p>
+      <h2 class="cert-title">CERTIFICATE OF COMPLETION</h2>
+      <p class="cert-body">This certifies that</p>
+      <p class="cert-name">— YOU —</p>
+      <p class="cert-body">have successfully completed the</p>
+      <p class="cert-course gold">AI STARTER LAB</p>
+      <p class="cert-body">Create, Design &amp; Present with Artificial Intelligence</p>
+      <div class="cert-footer">
+        <span><strong>Bro. Alvin</strong><br><small>Graphic Designer &amp; AI Specialist</small></span>
+        <span class="cert-seal" aria-hidden="true">🏅</span>
+        <span><strong>PMCC 4th Watch</strong><br><small>AI Workshop Series</small></span>
+      </div>
+      <p class="cert-message">You didn't just learn about AI today — <span class="neon">you became a creator.</span><br>Now go make something amazing. The future is yours. 🚀</p>
+      <button id="btn-celebrate" class="start-btn sm">🎉 CELEBRATE</button>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ BOTTOM HUD ============ -->
+<footer id="hud-bottom" class="hidden">
+  <button id="btn-prev" class="nav-btn" title="Previous (←)">◀</button>
+  <span id="slide-counter" class="mono">00 / 17</span>
+  <button id="btn-next" class="nav-btn" title="Next (→)">▶</button>
+</footer>
+
+<!-- ============ PRESENTER NOTES PANEL ============ -->
+<aside id="notes-panel" class="hidden glass">
+  <div class="notes-head">
+    <span class="mono">📝 PRESENTER CONSOLE — <span id="notes-slide-label"></span></span>
+    <button id="notes-close" class="hud-btn">✕</button>
+  </div>
+  <div class="notes-body">
+    <div class="notes-col"><h4>🎙 PRESENTER NOTES</h4><p id="notes-text"></p></div>
+    <div class="notes-col"><h4>🔊 VOICE-OVER SCRIPT</h4><p id="notes-voice"></p></div>
+    <div class="notes-col"><h4>🖼 IMAGE / AI PROMPT</h4><p id="notes-image" class="mono"></p></div>
+  </div>
+</aside>
+
+<!-- ============ SLIDE MENU OVERLAY ============ -->
+<div id="menu-overlay" class="hidden">
+  <div class="menu-box glass glow-border">
+    <div class="menu-head"><span class="mono">▸ SLIDE NAVIGATOR</span><button id="menu-close" class="hud-btn">✕</button></div>
+    <div id="menu-grid"></div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
