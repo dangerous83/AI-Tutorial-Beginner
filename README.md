@@ -58,4 +58,16 @@ PRESENTER_GUIDE.md  — run-of-show, notes, voice-over scripts, image prompts
 
 Read `PRESENTER_GUIDE.md` — it contains the suggested 2-hour run of show, a pre-show checklist, and per-slide presenter notes, voice-over scripts, and AI image prompts (also available live in the app via the `N` key).
 
-> ℹ️ The PMCC logo is loaded from the official CDN URL. If you'll present fully offline, download the logo and update the three `<img src>` references in `index.html` — a styled text fallback is shown automatically if the image can't load.
+> ℹ️ The PMCC logo and the five module artworks (A2–A6) are loaded from the official CDN URLs. If you'll present fully offline, download them and update the `<img src>` references in `index.html`. Fallbacks are automatic: the logo falls back to styled text, and each artwork panel hides itself if its image can't load.
+
+## 🖼 Module artwork placement
+
+| Image | Slide | Why it fits |
+|-------|-------|-------------|
+| A2 | Slide 2 — What is AI? | Sits beside the AI definition panel |
+| A3 | Slide 5 — AI Image Generation | Shown as the "result" next to the live demo prompt |
+| A4 | Slide 7 — AI Video Generation | Beside the text-to-video / image-to-video cards |
+| A5 | Slide 9 — Social Media Ads | Beside the 4-step ad workflow |
+| A6 | Slide 11 — Presentations with GPT | Beside the 4-step deck workflow |
+
+Each URL appears exactly once in `index.html` (marked with a `<!-- Visual Ax -->` comment), so swapping any artwork to a different slide is a one-line change.
