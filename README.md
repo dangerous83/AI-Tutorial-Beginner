@@ -7,6 +7,11 @@ An interactive, futuristic AI-dashboard-style workshop presentation — not a no
 - **Audience:** Beginners, ages 12–22
 - **Duration:** max 2 hours
 
+## 🌐 Live site
+
+The presentation is deployed with GitHub Pages:
+**https://dangerous83.github.io/AI-Tutorial-Beginner/**
+
 ## 🚀 Run it
 
 No build step, no dependencies. Just open the file:
